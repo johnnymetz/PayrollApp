@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayrollApp", "PayrollApp\PayrollApp.csproj", "{9F05D7B2-45BC-4649-9058-003AE7F9964F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F05D7B2-45BC-4649-9058-003AE7F9964F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F05D7B2-45BC-4649-9058-003AE7F9964F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F05D7B2-45BC-4649-9058-003AE7F9964F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F05D7B2-45BC-4649-9058-003AE7F9964F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

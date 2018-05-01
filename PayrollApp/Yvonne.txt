@@ -1,0 +1,11 @@
+PAYSLIP FOR MAR 2018
+====================
+Name of Staff: Yvonne
+Hours Worked: 8
+
+Basic Pay: $400.00
+Allowance: $0.00
+
+====================
+Total Pay: $400.00
+====================

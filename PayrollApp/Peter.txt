@@ -1,0 +1,11 @@
+PAYSLIP FOR MAR 2018
+====================
+Name of Staff: Peter
+Hours Worked: 150
+
+Basic Pay: $7,500.00
+Allowance: $0.00
+
+====================
+Total Pay: $7,500.00
+====================

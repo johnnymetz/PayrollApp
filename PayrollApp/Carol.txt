@@ -1,0 +1,11 @@
+PAYSLIP FOR MAR 2018
+====================
+Name of Staff: Carol
+Hours Worked: 9
+
+Basic Pay: $270.00
+Overtime: $0.00
+
+====================
+Total Pay: $270.00
+====================

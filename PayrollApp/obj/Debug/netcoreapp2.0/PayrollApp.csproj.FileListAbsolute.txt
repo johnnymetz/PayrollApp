@@ -1,0 +1,11 @@
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/obj/Debug/netcoreapp2.0/PayrollApp.csprojResolveAssemblyReference.cache
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/obj/Debug/netcoreapp2.0/PayrollApp.csproj.CoreCompileInputs.cache
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/obj/Debug/netcoreapp2.0/PayrollApp.AssemblyInfoInputs.cache
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/obj/Debug/netcoreapp2.0/PayrollApp.AssemblyInfo.cs
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/bin/Debug/netcoreapp2.0/PayrollApp.deps.json
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/bin/Debug/netcoreapp2.0/PayrollApp.runtimeconfig.json
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/bin/Debug/netcoreapp2.0/PayrollApp.runtimeconfig.dev.json
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/bin/Debug/netcoreapp2.0/PayrollApp.dll
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/bin/Debug/netcoreapp2.0/PayrollApp.pdb
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/obj/Debug/netcoreapp2.0/PayrollApp.dll
+/Users/jmetz/Projects/C# Projects/LearnCSharpInOneDay/PayrollApp/PayrollApp/obj/Debug/netcoreapp2.0/PayrollApp.pdb
