@@ -1,0 +1,11 @@
+PAYSLIP FOR APR 2018
+====================
+Name of Staff: John
+Hours Worked: 180
+
+Basic Pay: $5,400.00
+Overtime: $310.00
+
+====================
+Total Pay: $5,710.00
+====================

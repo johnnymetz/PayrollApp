@@ -1,3 +1,0 @@
-Staff with less than 10 working hours.
-Name of Staff: Carol, Hours Worked: 9
-Name of Staff: Yvonne, Hours Worked: 8

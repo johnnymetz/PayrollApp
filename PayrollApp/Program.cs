@@ -10,83 +10,25 @@ namespace PayrollApp
     {
         static void Main(string[] args)
         {
+            //PaySlip ps = new PaySlip(2018, 2);
+            //ps.GetOutputDirPath();
+            //ps.GetPayslipDirPath("ps_baby");
 
-            // initialize
-            List<Staff> staffList = new List<Staff>();
-            FileReader fr = new FileReader();
-            int month = 0, year = 0;
-
-            // get year
-            while (true)
-            {
-                Console.Write("Please enter the year: ");
-                try
-                {
-                    string yrString = Console.ReadLine();
-                    if (yrString.Length != 4)
-                    {
-                        Console.WriteLine("Year must be a 4-digit number.");
-                    }
-                    else
-                    {
-                        year = Convert.ToInt32(yrString);
-                        break;
-                    }
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine($"{e.Message} Please try again.");
-                }
-            }
-
-            // get month
-            while (true)
-            {
-                Console.Write("Please enter the month: ");
-                try
-                {
-                    string monthString = Console.ReadLine();
-                    month = Convert.ToInt32(monthString);
-                    if (month < 1 || month > 12)
-                    {
-                        Console.WriteLine("Month must be from 1 to 12. Please try again.");
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine($"{e.Message} Please try again.");
-                }
-            }
+            int year, month;
+            DataCollection dataCollection = new DataCollection();
+            year = dataCollection.GetYear();
+            month = dataCollection.GetMonth();
 
             // get staff from file
+            List<Staff> staffList = new List<Staff>();
+            FileReader fr = new FileReader();
             staffList = fr.ReadFile();
 
-            // enter staff data
-            foreach (Staff f in staffList)
-            {
-                while (true)
-                {
-                    try
-                    {
-                        Console.Write("Enter hours worked for {0}: ", f.NameOfStaff);
-                        f.HoursWorked = Convert.ToInt32(Console.ReadLine());
-                        f.CalculatePay();
-                        Console.WriteLine(f);
-                        break;
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }   
-                }
-            }
+            // input staff data
+            staffList = dataCollection.InputStaffData(staffList);
 
-            // write results to output reports
-            PaySlip ps = new PaySlip(month, year);
+            // write results to reports
+            PaySlip ps = new PaySlip(year, month);
             ps.GeneratePaySlip(staffList);
             ps.GenerateSummary(staffList);
 
@@ -256,9 +198,8 @@ namespace PayrollApp
     class PaySlip
     {
         // fields
-        private int month;
         private int year;
-        //private bool appendToFile = false;
+        private int month;
 
         // enum
         enum MonthsOfYear { JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC }
@@ -266,20 +207,21 @@ namespace PayrollApp
         // no properties
 
         // constructor
-        public PaySlip(int payMonth, int payYear)
+        public PaySlip(int payYear, int payMonth)
         {
-            month = payMonth;
             year = payYear;
+            month = payMonth;
         }
 
         // methods
-        public void GeneratePaySlip(List<Staff> myStaff)
+        public void GeneratePaySlip(List<Staff> myStaff, string payslipDirName = "payslips")
         {
+            string payslipDirPath = GetPayslipDirPath(payslipDirName);
             string path;
 
             foreach (Staff f in myStaff)
             {
-                path = $"{f.NameOfStaff}.txt";
+                path = Path.Combine(payslipDirPath, $"{f.NameOfStaff}.txt");
                 using (StreamWriter sw = new StreamWriter(path))
                 {
                     sw.WriteLine("PAYSLIP FOR {0} {1}", (MonthsOfYear)month, year);
@@ -302,9 +244,10 @@ namespace PayrollApp
                     sw.Close();
                 }
             }
+            Console.WriteLine($"Payslips successfully saved to: {payslipDirPath}");
         }
 
-        public void GenerateSummary(List<Staff> myStaff)
+        public void GenerateSummary(List<Staff> myStaff, string summaryFileName = "summary")
         {
             var result =
                 from f in myStaff
@@ -312,7 +255,9 @@ namespace PayrollApp
                 orderby f.NameOfStaff ascending
                 select new { f.NameOfStaff, f.HoursWorked };
 
-            string path = "summary.txt";
+            string outputDirPath = GetOutputDirPath();
+            string path = Path.Combine(outputDirPath, $"{summaryFileName}.txt");
+
             using (StreamWriter sw = new StreamWriter(path))
             {
                 sw.WriteLine("Staff with less than 10 working hours.");
@@ -321,6 +266,31 @@ namespace PayrollApp
                                  f.NameOfStaff, f.HoursWorked);
                 sw.Close();
             }
+            Console.WriteLine($"Summary file saved to: {path}");
+        }
+
+        public string GetOutputDirPath(string outputDirName = "output")
+        {
+            string cwd = Directory.GetCurrentDirectory();
+            string outputDirPath = Path.Combine(cwd, outputDirName);
+            if (!Directory.Exists(outputDirPath))
+            {
+                DirectoryInfo di = Directory.CreateDirectory(outputDirPath);
+                Console.WriteLine($"Output folder successfully created at {outputDirPath}");
+            }
+            return outputDirPath;
+        }
+
+        public string GetPayslipDirPath(string payslipDirName)
+        {
+            string outputDirPath = GetOutputDirPath();
+            string payslipDirPath = Path.Combine(outputDirPath, payslipDirName);
+            if (!Directory.Exists(payslipDirPath))
+            {
+                DirectoryInfo di = Directory.CreateDirectory(payslipDirPath);
+                Console.WriteLine($"Payslip folder successfully created at {payslipDirPath}");
+            }
+            return payslipDirPath;
         }
 
 		public override string ToString()
@@ -332,5 +302,82 @@ namespace PayrollApp
 		}
 
 	}
+
+    class DataCollection
+    {
+        // methods
+        public int GetYear()
+        {
+            while (true)
+            {
+                Console.Write("Please enter the year: ");
+                try
+                {
+                    string yrString = Console.ReadLine();
+                    if (yrString.Length != 4)
+                    {
+                        Console.WriteLine("Year must be a 4-digit number.");
+                    }
+                    else
+                    {
+                        int year = Convert.ToInt32(yrString);
+                        return year;
+                    }
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine($"{e.Message} Please try again.");
+                }
+            }
+        }
+
+        public int GetMonth()
+        {
+            while (true)
+            {
+                Console.Write("Please enter the month: ");
+                try
+                {
+                    string monthString = Console.ReadLine();
+                    int month = Convert.ToInt32(monthString);
+                    if (month < 1 || month > 12)
+                    {
+                        Console.WriteLine("Month must be from 1 to 12. Please try again.");
+                    }
+                    else
+                    {
+                        return month;
+                    }
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine($"{e.Message} Please try again.");
+                }
+            }
+        }
+
+        public List<Staff> InputStaffData(List<Staff> staffList)
+        {
+            foreach (Staff f in staffList)
+            {
+                while (true)
+                {
+                    try
+                    {
+                        Console.Write("Enter hours worked for {0}: ", f.NameOfStaff);
+                        f.HoursWorked = Convert.ToInt32(Console.ReadLine());
+                        f.CalculatePay();
+                        Console.WriteLine($"{f.NameOfStaff} made {f.TotalPay:C} this period.");
+                        break;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            }
+            return staffList;
+        }
+    }
 
 }

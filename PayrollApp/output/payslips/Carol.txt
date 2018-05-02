@@ -1,0 +1,11 @@
+PAYSLIP FOR APR 2018
+====================
+Name of Staff: Carol
+Hours Worked: 165
+
+Basic Pay: $4,950.00
+Overtime: $77.50
+
+====================
+Total Pay: $5,027.50
+====================
